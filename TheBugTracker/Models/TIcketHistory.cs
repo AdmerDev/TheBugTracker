@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheBugTracker.Models
 {
-    public class TIcketHistory
+    public class TicketHistory
     {
         public int Id { get; set; }
 

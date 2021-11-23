@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TheBugTracker.Models
 {
-    public class TIcketAttachment
+    public class TicketAttachment
     {
         public int Id { get; set; }
 
