@@ -17,7 +17,7 @@ namespace TheBugTracker.Models
         public string Property { get; set; }
 
         [DisplayName("Previous")]
-        public int OldValue { get; set; }
+        public string OldValue { get; set; }
 
         [DisplayName("Current")]
         public string NewValue { get; set; }
