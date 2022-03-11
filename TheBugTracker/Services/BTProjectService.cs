@@ -100,7 +100,7 @@ namespace TheBugTracker.Services
                 await UpdateProjectAsync(project);
 
                 //Archive the Tickets for the Project
-                foreach(Ticket ticket in project.Tickets)
+                foreach (Ticket ticket in project.Tickets)
                 {
                     ticket.ArchivedByProject = true;
                     _context.Update(ticket);
