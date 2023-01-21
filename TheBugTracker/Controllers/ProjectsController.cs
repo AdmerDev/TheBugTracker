@@ -70,7 +70,7 @@ namespace TheBugTracker.Controllers
             }
             else
             {
-                projects = await _projectService.GetAllProjectsByCompany(companyId);
+                projects = await _projectService.GetAllProjectsByCompanyAsync(companyId);
             }
 
             return View(projects);
@@ -80,7 +80,7 @@ namespace TheBugTracker.Controllers
         {
             int companyId = User.Identity.GetCompanyId().Value;
 
-            List<Project> projects = await _projectService.GetArchivedProjectsByCompany(companyId);
+            List<Project> projects = await _projectService.GetArchivedProjectsByCompanyAsync(companyId);
 
             return View(projects);
         }

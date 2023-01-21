@@ -52,8 +52,8 @@
                     <div class="card col m-1 p-2">
                         <div class="body">
                             <ul class=" list-unstyled basic-list">
-                                <li>Start Date: <span class="">@Model.StartDate.ToString("dd MMM, yyyy")</span></li>
-                                <li>Deadline: <span class="">@Model.EndDate.ToString("dd MMM, yyyy")</span></li>
+                                <li>Start Date: <span class="">@Model.StartDate.ToString("MMM dd, yyyy")</span></li>
+                                <li>Deadline: <span class="">@Model.EndDate.ToString("MMM dd, yyyy")</span></li>
                                 <li>Priority: <span class="">@Model.ProjectPriority?.Name</span></li>
                                 @* if() logic *@
                                 @if (today < end && today >= start)
@@ -175,7 +175,7 @@
                             {
                                 <div class="">
 
-                                    <span class="date">@history.Created.ToString("dd MMM yyyy")</span>
+                                    <span class="date">@history.Created.ToString("MMM dd yyyy")</span>
                                     <h6>@history.Description</h6>
                                     <span>By: <a href="" title="@history.User.FullName">@history.User.FullName</a></span>
                                     <div class="">
