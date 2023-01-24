@@ -38,6 +38,34 @@ namespace TheBugTracker.Services
             }
         }
 
+        public async Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment)
+        {
+            try
+            {
+                await _context.AddAsync(ticketAttachment);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task AddTicketCommentAsync(TicketComment ticketComment)
+        {
+            try
+            {
+                await _context.AddAsync(ticketComment);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task ArchiveTicketAsync(Ticket ticket)
         {
             try
@@ -58,7 +86,7 @@ namespace TheBugTracker.Services
 
             try
             {
-                if(ticket != null)
+                if (ticket != null)
                 {
                     try
                     {
@@ -258,6 +286,22 @@ namespace TheBugTracker.Services
             }
         }
 
+        public async Task<TicketAttachment> GetTicketAttachmentByIdAsync(int ticketAttachmentId)
+        {
+            try
+            {
+                TicketAttachment ticketAttachment = await _context.TicketAttachments
+                                                                  .Include(t => t.User)
+                                                                  .FirstOrDefaultAsync(t => t.Id == ticketAttachmentId);
+                return ticketAttachment;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<Ticket> GetTicketByIdAsync(int ticketId)
         {
             try
@@ -307,11 +351,11 @@ namespace TheBugTracker.Services
 
             try
             {
-                if(role == Roles.Admin.ToString())
+                if (role == Roles.Admin.ToString())
                 {
                     tickets = await GetAllTicketsByCompanyAsync(companyId);
                 }
-                else if(role == Roles.Developer.ToString())
+                else if (role == Roles.Developer.ToString())
                 {
                     tickets = (await GetAllTicketsByCompanyAsync(companyId)).Where(t => t.DeveloperUserId == userId).ToList();
                 }
