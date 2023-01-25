@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,12 +40,12 @@ namespace TheBugTracker.Extensions
         }
     }
 
-    public class MaxFileSizeAttribute : ValidationAttribute
+    public class AllowedExtensionsAttribute : ValidationAttribute
     {
-        private readonly int _maxFileSize;
-        public MaxFileSizeAttribute(int maxFileSize)
+        private readonly string[] _extensions;
+        public AllowedExtensionsAttribute(string[] extensions)
         {
-            _maxFileSize = maxFileSize;
+            _extensions = extensions;
         }
 
 
@@ -54,9 +55,10 @@ namespace TheBugTracker.Extensions
             var file = value as IFormFile;
             if (file != null)
             {
-                if (file.Length > _maxFileSize)
+                var extension = Path.GetExtension(file.FileName);
+                if (!_extensions.Contains(extension.ToLower()))
                 {
-                    return new ValidationResult(GetErrorMessage());
+                    return new ValidationResult(GetErrorMessage(extension));
                 }
             }
 
@@ -65,9 +67,9 @@ namespace TheBugTracker.Extensions
         }
 
 
-        public string GetErrorMessage()
+        public string GetErrorMessage(string ext)
         {
-            return $"Maximum allowed file size is { _maxFileSize} bytes.";
+            return $"The file extension {ext} is not allowed!";
         }
     }
 }
