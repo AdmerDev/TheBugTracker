@@ -165,7 +165,7 @@ namespace TheBugTracker.Services
             try
             {
                 Ticket ticket = await _context.Tickets.FindAsync(ticketId);
-                string description = model.ToLower().Replace("Ticket", "");
+                string description = model.ToLower().Replace("ticket", "");
                 description = $"New {description} add to ticket: {ticket.Title}";
 
                 TicketHistory history = new()
